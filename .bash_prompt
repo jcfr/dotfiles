@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# From https://gist.github.com/mojodna/69960
+# git status with a dirty flag
+function __git_status_flag {
+  git_status="$(git status 2> /dev/null)"
+  remote_pattern="^# Your branch is (.*) of"
+  diverge_pattern="# Your branch and (.*) have diverged"
+  if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+    state="⚡"
+    spacer=" "
+  fi
+
+  if [[ ${git_status} =~ ${remote_pattern} ]]; then
+    spacer=" "
+    if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+      remote="↑"
+    else
+      remote="↓"
+    fi
+  fi
+
+  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+    remote="↕"
+    spacer=" "
+  fi
+
+  echo "${state}${remote}${spacer}"
+}
+
+# 2016.03.26
+# The following "smart_git_<func>" forward all aarguments to <func> expect
+# for "fuse.sshfs" filesystem.
+function __smart_git_status_flag {
+  # Adapted from http://unix.stackexchange.com/questions/72223/check-if-folder-is-a-mounted-remote-filesystem
+  fs=$(df -P -T $(pwd) | tail -n +2 | awk '{print $2}')
+  if [[ $fs != "fuse.sshfs" ]]; then
+    echo $(__git_status_flag $@)
+  fi
+}
+
+function __smart_git_ps1 {
+  # Adapted from http://unix.stackexchange.com/questions/72223/check-if-folder-is-a-mounted-remote-filesystem
+  fs=$(df -P -T $(pwd) | tail -n +2 | awk '{print $2}')
+  if [[ $fs != "fuse.sshfs" ]]; then
+    __git_ps1 $@
+  fi
+}
+
+# the prompt itself
+PS1='\[\e[32m\]\u@\[\e[1m\]\h\[\e[22m\]:\[\e[1;34m\]\W\[\e[22;35m\]$(__smart_git_ps1 " [\[\e[33m\]$(__smart_git_status_flag)\[\e[35m\]%s]")\[\e[33m\] \$ \[\e[0m\]'
