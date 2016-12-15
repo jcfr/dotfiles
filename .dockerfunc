@@ -16,4 +16,12 @@ docker_del_stopped(){
 		docker rm $name
 	fi
 }
-
+# See https://lebkowski.name/docker-volumes/
+docker_list_unused_volumes(){
+       sudo find '/var/lib/docker/volumes/' -mindepth 1 -maxdepth 1 -type d | grep -vFf <(
+          docker ps -aq | xargs docker inspect | jq -r '.[]|.Mounts|.[]|.Name|select(.)'
+       )
+}
+dcleanup_volumes(){
+       docker volume ls -qf dangling=true | xargs -r docker volume rm
+}
