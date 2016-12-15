@@ -25,6 +25,9 @@
 	branches = branch -a
 	remotes = remote -v
 
+  # Enable signed commit
+        enablesignedcommit = config commit.gpgsign true
+
 [diff]
 	tool = meld
 
