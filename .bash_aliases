@@ -25,3 +25,7 @@ export AOSP_VOL=~/Projects/aosp-root/
 alias jupyter='docker run -v /home/jcfr/Projects/sandbox/Notebooks:/home/jovyan/work -d -p 8888:8888 jupyter/scipy-notebook start-notebook.sh'
 alias jupyterkill='docker kill $(docker ps --filter "status=running" --filter "ancestor=jupyter/scipy-notebook" -q)'
 
+
+# Drop cache
+# See http://unix.stackexchange.com/questions/87908/how-do-you-empty-the-buffers-and-cache-on-a-linux-system
+alias drop_caches='(sudo sysctl vm.drop_caches=1)'
