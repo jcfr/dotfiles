@@ -1,12 +1,19 @@
 #!/bin/bash
 
-# Highlight section titles in manual pages
-export LESS_TERMCAP_md="${yellow}";
-
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
 
+# virtualenvwrapper
+if [[ $VIRTUALENV_DISABLED ]];
+then
+  echo "Skipping VirtualEnv initialization"
+else
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/Projects
+  # shellcheck source=/dev/null
+  source ~/.local/bin/virtualenvwrapper.sh
+fi
 
 # Cache for project build
 export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
-mkdir -p $ExternalData_OBJECT_STORES
+mkdir -p "$ExternalData_OBJECT_STORES"

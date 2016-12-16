@@ -6,7 +6,7 @@ function __git_status_flag {
   git_status="$(git status 2> /dev/null)"
   remote_pattern="^# Your branch is (.*) of"
   diverge_pattern="# Your branch and (.*) have diverged"
-  if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+  if [[ ! ${git_status} =~ "working directory clean" ]]; then
     state="⚡"
     spacer=" "
   fi
@@ -29,21 +29,21 @@ function __git_status_flag {
 }
 
 # 2016.03.26
-# The following "smart_git_<func>" forward all aarguments to <func> expect
+# The following "smart_git_<func>" forward all arguments to <func> expect
 # for "fuse.sshfs" filesystem.
 function __smart_git_status_flag {
   # Adapted from http://unix.stackexchange.com/questions/72223/check-if-folder-is-a-mounted-remote-filesystem
-  fs=$(df -P -T $(pwd) | tail -n +2 | awk '{print $2}')
+  fs=$(df -P -T "$(pwd)" | tail -n +2 | awk '{print $2}')
   if [[ $fs != "fuse.sshfs" ]]; then
-    echo $(__git_status_flag $@)
+    __git_status_flag "$@"
   fi
 }
 
 function __smart_git_ps1 {
   # Adapted from http://unix.stackexchange.com/questions/72223/check-if-folder-is-a-mounted-remote-filesystem
-  fs=$(df -P -T $(pwd) | tail -n +2 | awk '{print $2}')
+  fs=$(df -P -T "$(pwd)" | tail -n +2 | awk '{print $2}')
   if [[ $fs != "fuse.sshfs" ]]; then
-    __git_ps1 $@
+    __git_ps1 "$@"
   fi
 }
 

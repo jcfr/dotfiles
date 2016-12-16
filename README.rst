@@ -33,3 +33,12 @@ this::
   GH_USER="nickname"
   git config --global github.user "$GH_USER"
 
+Test
+====
+
+The tests use `shellcheck <https://github.com/koalaman/shellcheck>`_. You don't
+need to install anything. They run in a container.
+
+::
+  $ make test
+

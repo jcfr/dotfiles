@@ -1,4 +1,4 @@
-.PHONY: all bin dotfiles etc
+.PHONY: all bin dotfiles etc test shellcheck
 
 all: bin dotfiles etc
 
@@ -24,4 +24,13 @@ etc:
 	done;
 	systemctl --user daemon-reload
 	sudo systemctl daemon-reload
+
+test: shellcheck
+
+shellcheck:
+	docker run --rm -it \
+		--name df-shellcheck \
+		-v $(CURDIR):/usr/src:ro \
+		--workdir /usr/src \
+		r.j3ss.co/shellcheck ./test.sh
 

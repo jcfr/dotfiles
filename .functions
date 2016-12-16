@@ -2,7 +2,8 @@
 
 # Create a new directory and enter it
 mkd() {
-	mkdir -p "$@" && cd "$@"
+	mkdir -p "$@"
+	cd "$@" || exit
 }
 
 # Determine size of a file or total size of a directory
@@ -15,13 +16,14 @@ fs() {
 	if [[ -n "$@" ]]; then
 		du $arg -- "$@"
 	else
-		du $arg .[^.]* *
+		du $arg -- .[^.]* *
 	fi
 }
 
 # Create a data URL from a file
 dataurl() {
-	local mimeType=$(file -b --mime-type "$1")
+	local mimeType
+	mimeType=$(file -b --mime-type "$1")
 	if [[ $mimeType == text/* ]]; then
 		mimeType="${mimeType};charset=utf-8"
 	fi
@@ -30,7 +32,9 @@ dataurl() {
 
 # UTF-8-encode a string of Unicode symbols
 escape() {
-	printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
+	local args
+	args=( $(printf "%s" "$*" | xxd -p -c1 -u) )
+	printf "\\\x%s" "${args[@]}"
 	# print a newline unless we’re piping the output to another program
 	if [ -t 1 ]; then
 		echo ""; # newline
@@ -39,7 +43,7 @@ escape() {
 
 # Decode \x{ABCD}-style Unicode escape sequences
 unidecode() {
-	perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
+	perl -e "binmode(STDOUT, ':utf8'); print \"$*\""
 	# print a newline unless we’re piping the output to another program
 	if [ -t 1 ]; then
 		echo ""; # newline
@@ -48,7 +52,7 @@ unidecode() {
 
 # Get a character’s Unicode code point
 codepoint() {
-	perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
+	perl -e "use utf8; print sprintf('U+%04X', ord(\"$*\"))"
 	# print a newline unless we’re piping the output to another program
 	if [ -t 1 ]; then
 		echo ""; # newline
@@ -57,11 +61,13 @@ codepoint() {
 
 # Call from a local repo to open the repository on github/bitbucket in browser
 repo() {
-	local giturl=$(git config --get remote.origin.url | sed 's/git@/\/\//g' | sed 's/.git$//' | sed 's/https://g' | sed 's/:/\//g')
+	local giturl
+	giturl=$(git config --get remote.origin.url | sed 's/git@/\/\//g' | sed 's/.git$//' | sed 's/https://g' | sed 's/:/\//g')
 	if [[ $giturl == "" ]]; then
 		echo "Not a git repository or no remote.origin.url is set."
 	else
-		local gitbranch=$(git rev-parse --abbrev-ref HEAD)
+		local gitbranch
+		gitbranch=$(git rev-parse --abbrev-ref HEAD)
 		local giturl="http:${giturl}"
 
 		if [[ $gitbranch != "master" ]]; then
@@ -72,21 +78,21 @@ repo() {
                     	fi
 		fi
 
-		echo $giturl
-		open $giturl
+		echo "$giturl"
+		open "$giturl"
 	fi
 }
 
 # Get colors in manual pages
 man() {
 	env \
-		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-		LESS_TERMCAP_md=$(printf "\e[1;31m") \
-		LESS_TERMCAP_me=$(printf "\e[0m") \
-		LESS_TERMCAP_se=$(printf "\e[0m") \
-		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-		LESS_TERMCAP_ue=$(printf "\e[0m") \
-		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_me="$(printf '\e[0m')" \
+		LESS_TERMCAP_se="$(printf '\e[0m')" \
+		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+		LESS_TERMCAP_ue="$(printf '\e[0m')" \
+		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
 }
 
@@ -109,15 +115,15 @@ sync1way() {
     fi
     local folder_src=$1
     local folder_dest=$2
-    [[ ! -d $folder_dest ]] && mkdir -p $folder_dest
+    [[ ! -d "$folder_dest" ]] && mkdir -p "$folder_dest"
     inotifywait -mr \
             --timefmt '%d/%m/%y %H:%M' \
             --format '%T %w %f' \
-            -e close_write $folder_src | while read date time dir file; do
+            -e close_write "$folder_src" | while read -r dir file; do
         FILECHANGE=${dir}${file};
         echo ""
         printf "%0.s*" {1..80}; printf '\n'
         echo "$FILECHANGE";
-        rsync -rtvu $folder_src $folder_dest;
+        rsync -rtvu "$folder_src" "$folder_dest";
     done
 }
