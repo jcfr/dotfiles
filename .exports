@@ -6,3 +6,7 @@ export LESS_TERMCAP_md="${yellow}";
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
 
+
+# Cache for project build
+export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
+mkdir -p $ExternalData_OBJECT_STORES
