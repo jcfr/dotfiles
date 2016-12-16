@@ -2,6 +2,10 @@
 dotfiles
 ========
 
+.. image:: https://travis-ci.org/jcfr/dotfiles.svg?branch=master
+  :target: https://travis-ci.org/jcfr/dotfiles
+  :alt: Travis CI
+
 The organization of this project is based on the great work of `@jessfraz <https://github.com/jessfraz>`_.
 See `here <https://github.com/jessfraz/dotfiles>`_ for the original project.
 
@@ -40,5 +44,6 @@ The tests use `shellcheck <https://github.com/koalaman/shellcheck>`_. You don't
 need to install anything. They run in a container.
 
 ::
+
   $ make test
 
