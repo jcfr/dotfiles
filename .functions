@@ -101,3 +101,23 @@ isup() {
 	fi
 }
 
+# one-way sync of folder_src into folder_dest
+sync1way() {
+    if [[ "$#" != 2 ]]; then
+        echo "Usage: sync1way /path/to/src /path/to/dst"
+        return 1
+    fi
+    local folder_src=$1
+    local folder_dest=$2
+    [[ ! -d $folder_dest ]] && mkdir -p $folder_dest
+    inotifywait -mr \
+            --timefmt '%d/%m/%y %H:%M' \
+            --format '%T %w %f' \
+            -e close_write $folder_src | while read date time dir file; do
+        FILECHANGE=${dir}${file};
+        echo ""
+        printf "%0.s*" {1..80}; printf '\n'
+        echo "$FILECHANGE";
+        rsync -rtvu $folder_src $folder_dest;
+    done
+}
