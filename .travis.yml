@@ -1,11 +1,18 @@
----
-  language: haskell
-  sudo: false
-  notifications:
-    email: true
-  ghc:
-    - 7.10
-  install:
-    - cabal install shellcheck
-  script:
-- ./test.sh
+sudo: required
+
+services:
+  - docker
+
+cache:
+  directories:
+  - $HOME/docker
+
+notifications:
+  email: true
+
+before_install:
+  - pip install -U scikit-ci-addons
+  - ci_addons docker load-pull-save r.j3ss.co/shellcheck
+
+script:
+  - make test
