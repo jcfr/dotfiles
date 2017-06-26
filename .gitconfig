@@ -31,6 +31,9 @@
   # Enable signed commit
   enablesignedcommit = config commit.gpgsign true
 
+  # git sed 's/old-method-name/new-method-name/ig'
+  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+
 [diff]
   tool = meld
 
