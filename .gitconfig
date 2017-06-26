@@ -1,55 +1,55 @@
 [user]
-	email = jchris.fillionr@kitware.com
-	name = Jean-Christophe Fillion-Robin
+  email = jchris.fillionr@kitware.com
+  name = Jean-Christophe Fillion-Robin
   signingkey = 0x071F55F1FA11B4E3
 
 [commit]
-	#gpgsign = true
+  #gpgsign = true
 
 [alias]
 
   # Clone a repository including all submodules
-	c = clone --recursive
+  c = clone --recursive
 
   # Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
   # View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
   # Pretty log
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
   # View the current working tree status using the short format
-	s = status -s
+  s = status -s
 
   # Show verbose output about tags, branches or remotes
-	tags = tag -l
-	branches = branch -a
-	remotes = remote -v
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
 
   # Enable signed commit
-        enablesignedcommit = config commit.gpgsign true
+  enablesignedcommit = config commit.gpgsign true
 
 [diff]
-	tool = meld
+  tool = meld
 
-	# Detect copies as well as renames
-	renames = copies
+  # Detect copies as well as renames
+  renames = copies
 
 [color]
-	ui = auto
+  ui = auto
 
 [help]
 
-	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+  # Automatically correct and execute mistyped commands
+  autocorrect = 1
 
 [merge]
 
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
-	tool = meld
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+  tool = meld
 
 # URL shorthands
 #
