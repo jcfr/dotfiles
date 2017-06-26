@@ -5,7 +5,9 @@ alias ack='ack-grep'
 alias cvs-status='cvs -q status | grep ^[?F] | grep -v "to-date"'
 
 # See https://hub.github.com/
-eval "$(hub alias -s)"
+if which hub >/dev/null ; then
+  eval "$(hub alias -s)"
+fi
 
 # Rollback modified time
 alias rb='touch -d"-30min"'
