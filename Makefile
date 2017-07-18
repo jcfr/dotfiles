@@ -20,10 +20,12 @@ dotfiles:
 
 etc:
 	# add symlinks for etc
+	# Note (jc): since hard-link can't be created between filesystem (home and system are different partition)
+	#            let's use symbolic link
 	for file in $(shell find $(CURDIR)/etc -type f -not -name ".*.swp"); do \
 		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
 		echo "[etc] $$f"; \
-		sudo ln -f $$file $$f; \
+		sudo ln -sfn $$file $$f; \
 	done;
 	systemctl --user daemon-reload
 	sudo systemctl daemon-reload
