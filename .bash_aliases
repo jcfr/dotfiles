@@ -23,7 +23,7 @@ alias umount-kw-gdrive='fusermount -u ~/mnt/gdrive-kitware/'
 export AOSP_VOL=~/Projects/aosp-root/
 
 # Start/Stop container serving jupyter based of 'scipy-notebook' stack.
-stack=jupyter/scipy-notebook-panda-0.18
+stack=jupyter/scipy-notebook
 alias jupyter='docker run -v /home/jcfr/Projects/sandbox/Notebooks:/home/jovyan/work -d -p 8888:8888 $stack start-notebook.sh'
 alias jupytercwd='docker run -v .:/home/jovyan/work -d -p 8888:8888 $stack start-notebook.sh'
 alias jupyterkill='docker kill $(docker ps --filter "status=running" --filter "ancestor=$stack" -q)'
