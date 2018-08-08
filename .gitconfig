@@ -69,3 +69,10 @@
 [url "git@github.com:"]
   pushInsteadOf = "https://github.com/"
 
+
+[credential]
+  helper = cache
+
+[credential "https://github.com"]
+  user = jcfr
+
