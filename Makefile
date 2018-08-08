@@ -1,6 +1,6 @@
 .PHONY: all bin dotfiles etc test shellcheck
 
-all: bin dotconfig dotfiles etc
+all: bin dotdirs dotfiles etc
 
 bin:
 	# add symlinks for things in bin
@@ -18,10 +18,11 @@ dotfiles:
 		ln -sfn $$file $(HOME)/$$f; \
 	done;
 
-dotconfig:
+dotdirs:
 	for file in $(shell find ".config/" -type f -not -name ".*.swp"); do \
 		f=$$file; \
-		echo "[dotconfig] $(HOME)/$$f <- $(CURDIR)/$$f"; \
+		mkdir -p $$(dirname $(HOME)/$$f); \
+		echo "[dotdir] $(HOME)/$$f <- $(CURDIR)/$$f"; \
 		ln -sfn $(CURDIR)/$$f $(HOME)/$$f; \
 	done;
 
