@@ -12,14 +12,14 @@ bin:
 
 dotfiles:
 	# add symlinks for dotfiles
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".config" -not -name ".gitignore" -not -name ".git" -not -name ".*.swp" -not -name ".irssi" -not -name ".gnupg"); do \
+	for file in $(shell find $(CURDIR) -name ".*" -not -name ".config" -not -name ".vim" -not -name ".gitignore" -not -name ".git" -not -name ".*.swp" -not -name ".irssi" -not -name ".gnupg"); do \
 		f=$$(basename $$file); \
 		echo "[dotfile] $(HOME)/$$f"; \
 		ln -sfn $$file $(HOME)/$$f; \
 	done;
 
 dotdirs:
-	for file in $(shell find ".config/" -type f -not -name ".*.swp"); do \
+	for file in $(shell find ".config/" ".vim/" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
 		f=$$file; \
 		mkdir -p $$(dirname $(HOME)/$$f); \
 		echo "[dotdir] $(HOME)/$$f <- $(CURDIR)/$$f"; \

@@ -14,6 +14,8 @@ Installation
 
 ::
 
+  $ git clone --recurse-submodules git://github.com/jcfr/dotfiles
+  $ cd dotfiles
   $ make
 
 This will create symlinks from this repo to your home folder.
