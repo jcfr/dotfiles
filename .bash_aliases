@@ -41,3 +41,5 @@ alias jupyterdock_open='xdg-open http://127.0.0.1:8888'
 # Drop cache
 # See http://unix.stackexchange.com/questions/87908/how-do-you-empty-the-buffers-and-cache-on-a-linux-system
 alias drop_caches='(sudo sysctl vm.drop_caches=1)'
+
+alias dockerlint='docker run -it --rm -v "$(pwd)/Dockerfile":/Dockerfile:ro redcoolbeans/dockerlint'
