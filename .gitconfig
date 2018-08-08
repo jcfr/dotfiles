@@ -28,8 +28,9 @@
   branches = branch -a
   remotes = remote -v
 
-  # Enable signed commit
+  # Enable or disabled signed commit
   enablesignedcommit = config commit.gpgsign true
+  disablesignedcommit = config commit.gpgsign false
 
   # git sed 's/old-method-name/new-method-name/ig'
   sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
