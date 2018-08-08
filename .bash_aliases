@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # General
 alias ack='ack-grep'
 
@@ -24,10 +26,17 @@ export AOSP_VOL=~/Projects/aosp-root/
 
 # Start/Stop container serving jupyter based of 'scipy-notebook' stack.
 stack=jupyter/scipy-notebook
-alias jupyter='docker run -v /home/jcfr/Projects/sandbox/Notebooks:/home/jovyan/work -d -p 8888:8888 $stack start-notebook.sh'
-alias jupytercwd='docker run -v .:/home/jovyan/work -d -p 8888:8888 $stack start-notebook.sh'
-alias jupyterkill='docker kill $(docker ps --filter "status=running" --filter "ancestor=$stack" -q)'
-alias jupyteropen='xdg-open http://127.0.0.1:8888'
+
+# shellcheck disable=SC2139
+alias jupyterdock='docker run -v /home/jcfr/Projects/sandbox/Notebooks:/home/jovyan/work -d -p 8888:8888 '${stack}' start-notebook.sh --NotebookApp.token=""'
+
+# shellcheck disable=SC2139
+alias jupyterdock_cwd='docker run -v .:/home/jovyan/work -d -p 8888:8888 '${stack}' start-notebook.sh'
+
+# shellcheck disable=SC2139
+alias jupyterdock_kill='docker kill $(docker ps --filter "status=running" --filter "ancestor='${stack}'" -q)'
+
+alias jupyterdock_open='xdg-open http://127.0.0.1:8888'
 
 # Drop cache
 # See http://unix.stackexchange.com/questions/87908/how-do-you-empty-the-buffers-and-cache-on-a-linux-system
