@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-script_dir="`cd $(dirname $(readlink -f "$0")); pwd`"
+# shellcheck disable=SC2046
+script_dir=$(cd $(dirname $(readlink -f "$0")) || exit 1; pwd)
 
 env_name=git-remote-hg
 eval "bash $WORKON_HOME/$env_name/bin/activate"
 
-python2 $script_dir/git-remote-hg.py "$@"
+python2 "$script_dir/git-remote-hg.py" "$@"
