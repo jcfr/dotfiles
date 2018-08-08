@@ -60,15 +60,14 @@
 #
 # Use git and git+ssh instead of https
 # Source: https://gist.github.com/stevenh512/2909546
-[url "git://github.com/"]
-  insteadOf = https://github.com/
+#[url "git://github.com/"]
+#  insteadOf = https://github.com/
 
 [url "git@github.com:"]
   pushInsteadOf = "git://github.com/"
 
-[url "git@github.com:"]
-  pushInsteadOf = "https://github.com/"
-
+#[url "git@github.com:"]
+#  pushInsteadOf = "https://github.com/"
 
 [credential]
   helper = cache
