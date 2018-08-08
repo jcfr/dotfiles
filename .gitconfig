@@ -75,3 +75,6 @@
 [credential "https://github.com"]
   user = jcfr
 
+
+[gui]
+	encoding = utf-8
