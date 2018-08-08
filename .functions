@@ -127,3 +127,53 @@ sync1way() {
         rsync -rtvu "$folder_src" "$folder_dest";
     done
 }
+
+# execute command in folder if any files in folder changed
+watchandrun() {
+    if [[ "$#" -lt 2 ]]; then
+        echo "Usage: watchandrun /path/to/a/folder command [arg [...]]"
+        return 1
+    fi
+    local folder=$1; shift;
+    local command=$1; shift;
+    inotifywait -mr --exclude "$folder/.git|$folder/idea" \
+            --timefmt '%d/%m/%y %H:%M' \
+            --format '%T %w %f' \
+            -e close_write "$folder" | while read -r dir file; do
+        FILECHANGE=${dir}${file};
+        echo ""
+        printf "%0.s*" {1..80}; printf '\n'
+        echo "$FILECHANGE";
+        echo "Executing $command $*"
+        (cd "$folder" || exit 1; "$command" "$@";)
+    done
+}
+
+pathadd() {
+    if [ -d "$1" ] && ! echo $PATH | grep -E -q "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH="$PATH:${1%/}"
+        else
+            PATH="${1%/}:$PATH"
+        fi
+    fi
+}
+
+pathrm() {
+    PATH="$(echo ${PATH} | sed -e "s;\(^\|:\)${1%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+}
+
+validate_ci_configs() {
+  if [[ -f .circleci/config.yml ]]; then
+    circleci config validate -c .circleci/config.yml
+  else
+    echo ".circleci/config.yml not found"
+  fi
+
+  if [[ .travis.yml ]]; then
+    travis-cli lint .travis.yml
+  else
+    echo ".travis.yml not found"
+  fi
+
+}
