@@ -34,6 +34,7 @@
 
   # git sed 's/old-method-name/new-method-name/ig'
   sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+  show-net-merge = !sh -c \"git cat-file -p HEAD | sed -e \\\"1,/^$/d\\\" | git commit-tree \\\"HEAD^{tree}\\\" -p \\\"HEAD^1\\\" | xargs gitk \\\"^HEAD\\\"\"
 
 [diff]
   tool = meld
