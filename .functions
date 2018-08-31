@@ -177,3 +177,44 @@ validate_ci_configs() {
   fi
 
 }
+
+expand_tabs_as_n_spaces() {
+  if [[ "$#" != 2 ]]; then
+    echo "Usage: expand_tabs_as_n_spaces number_of_space file"
+    return 1
+  fi
+  number_of_space=$1
+  input_file="$2"
+  output_file="${input_file}"
+  tmp=`mktemp` && expand -t ${number_of_space} "${input_file}" > "${tmp}" && mv "${tmp}" "${output_file}"
+}
+
+expand_tabs_as_two_spaces() {
+  if [[ "$#" -lt 1 ]]; then
+    echo "Usage: expand_tabs_as_two_spaces file ..."
+    return 1
+  fi
+  for file in $@; do
+    expand_tabs_as_n_spaces 2 "${file}"
+  done
+}
+
+expand_tabs_as_four_spaces() {
+  if [[ "$#" -lt 1 ]]; then
+    echo "Usage: expand_tabs_as_four_spaces file ..."
+    return 1
+  fi
+  for file in $@; do
+    expand_tabs_as_n_spaces 4 "${file}"
+  done
+}
+
+strip_trailing_whitespaces() {
+  if [[ "$#" -lt 1 ]]; then
+    echo "Usage: strip_trailing_whitespaces file ..."
+    return 1
+  fi
+  for file in $@; do
+    sed -i 's/[ \t]*$//' "${file}"
+  done
+}
