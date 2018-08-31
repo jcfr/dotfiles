@@ -43,3 +43,7 @@ alias jupyterdock_open='xdg-open http://127.0.0.1:8888'
 alias drop_caches='(sudo sysctl vm.drop_caches=1)'
 
 alias dockerlint='docker run -it --rm -v "$(pwd)/Dockerfile":/Dockerfile:ro redcoolbeans/dockerlint'
+
+# Run cmake executable associated with the current build tree. The "h" stands for "here"
+# and allows for quick auto-completion since there was no command starting with "hc"
+alias hcmake='$(cat CMakeCache.txt  | ack CMAKE_COMMAND | cut -d= -f2)'
