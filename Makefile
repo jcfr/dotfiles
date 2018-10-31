@@ -10,7 +10,10 @@ bin:
 		sudo ln -sf $$file /usr/local/bin/$$f; \
 	done
 
-dotfiles:
+generate_bash_aliases_ssh:
+	$(CURDIR)/generate_bash_aliases_ssh.sh
+
+dotfiles: generate_bash_aliases_ssh
 	# add symlinks for dotfiles
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".config" -not -name ".vim" -not -name ".gitignore" -not -name ".git" -not -name ".*.swp" -not -name ".irssi" -not -name ".gnupg"); do \
 		f=$$(basename $$file); \
