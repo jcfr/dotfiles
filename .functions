@@ -218,3 +218,9 @@ strip_trailing_whitespaces() {
     sed -i 's/[ \t]*$//' "${file}"
   done
 }
+
+# Remove the last command from the history
+# See https://unix.stackexchange.com/a/233625/153286
+forget() {
+  history -d $( history | awk 'END{print $1-1}' )
+}
