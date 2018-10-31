@@ -44,6 +44,8 @@ alias drop_caches='(sudo sysctl vm.drop_caches=1)'
 
 alias dockerlint='docker run -it --rm -v "$(pwd)/Dockerfile":/Dockerfile:ro redcoolbeans/dockerlint'
 
-# Run cmake executable associated with the current build tree. The "h" stands for "here"
+# Run cmake/ccmake/ctest/cpack/cmake-gui executable associated with the current build tree. The "h" stands for "here"
 # and allows for quick auto-completion since there was no command starting with "hc"
-alias hcmake='$(cat CMakeCache.txt  | ack CMAKE_COMMAND | cut -d= -f2)'
+for target in cmake ccmake ctest cpack cmake-gui; do
+  alias h${target}='$(cat CMakeCache.txt  | ack CMAKE_COMMAND | cut -d= -f2 | xargs dirname)/'${target}
+done
