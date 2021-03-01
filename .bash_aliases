@@ -28,7 +28,7 @@ export AOSP_VOL=~/Projects/aosp-root/
 stack=jupyter/scipy-notebook
 
 # shellcheck disable=SC2139
-alias jupyterdock='docker run -v /home/jcfr/Projects/sandbox/Notebooks:/home/jovyan/work -d -p 8888:8888 '${stack}' start-notebook.sh --NotebookApp.token=""'
+alias jupyterdock='docker run -v /home/jcfr/Projects/Notebooks:/home/jovyan/work -d -p 8888:8888 '${stack}' start-notebook.sh --NotebookApp.token=""'
 
 # shellcheck disable=SC2139
 alias jupyterdock_cwd='docker run -v .:/home/jovyan/work -d -p 8888:8888 '${stack}' start-notebook.sh'
