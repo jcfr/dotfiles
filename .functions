@@ -233,3 +233,8 @@ list_text_files_recursively() {
 forget() {
   history -d $( history | awk 'END{print $1-1}' )
 }
+
+# See http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-4.html
+reset_terminal() {
+  echo -e \\033c
+}
