@@ -4,7 +4,7 @@
   signingkey = 0x071F55F1FA11B4E3
 
 [commit]
-  #gpgsign = true
+  gpgsign = true
 
 [alias]
 
