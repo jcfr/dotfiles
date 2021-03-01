@@ -228,6 +228,13 @@ list_text_files_recursively() {
   find . \( -path ./.git -o -path ./.svn \) -prune -o -type f -exec grep -Iq . {} \; -print
 }
 
+convert_vtkSmartPointer_to_vtkNew(){
+  for f in $(ack "vtkSmartPointer\<vtk\w+\> \w+\s*\=\s*vtkSmartPointer\<vtk\w+\>::New\(\);" -l); do \
+    echo "Processing $f"; \
+    sed -i -E 's/vtkSmartPointer.(vtk\w+). (\w+)\s*\=\s*vtkSmartPointer.vtk\w+.::New\(\);/vtkNew<\1> \2;/g'  $f; \
+  done
+}
+
 # Remove the last command from the history
 # See https://unix.stackexchange.com/a/233625/153286
 forget() {
