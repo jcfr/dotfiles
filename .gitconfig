@@ -32,6 +32,10 @@
   enablesignedcommit = config commit.gpgsign true
   disablesignedcommit = config commit.gpgsign false
 
+  # switch to personnal author
+  enablepersonalemail = config user.email jean-christophe@fillion-robin.org
+  enableworkemail = config user.email jchris.fillionr@kitware.com
+
   # git sed 's/old-method-name/new-method-name/ig'
   sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
   show-net-merge = !sh -c \"git cat-file -p HEAD | sed -e \\\"1,/^$/d\\\" | git commit-tree \\\"HEAD^{tree}\\\" -p \\\"HEAD^1\\\" | xargs gitk \\\"^HEAD\\\"\"
