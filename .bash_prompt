@@ -48,4 +48,25 @@ function __smart_git_ps1 {
 }
 
 # the prompt itself
-PS1='\[\e[32m\]\u@\[\e[1m\]\h\[\e[22m\]:\[\e[1;34m\]\W\[\e[22;35m\]$(__smart_git_ps1 " [\[\e[33m\]$(__smart_git_status_flag)\[\e[35m\]%s]")\[\e[33m\] \$ \[\e[0m\]'
+#PS1='\[\e[32m\]\u@\[\e[1m\]\h\[\e[22m\]:\[\e[1;34m\]\W\[\e[22;35m\]$(__smart_git_ps1 " [\[\e[33m\]$(__smart_git_status_flag)\[\e[35m\]%s]")\[\e[33m\] \$ \[\e[0m\]'
+
+# Setup legit autocomplete
+
+
+# Setup powerline - See https://gist.github.com/so0k/2b2ad209c6eb396359efefc33cb8e752
+powerline-daemon -q
+export POWERLINE_BASH_CONTINUATION=1
+export POWERLINE_BASH_SELECT=1
+export POWERLINE_COMMAND=powerline
+export POWERLINE_CONFIG_COMMAND=powerline-config
+export POWERLINE_HOME=$HOME/.local/lib/python3.4/site-packages/powerline
+
+# See https://github.com/powerline/powerline/issues/850#issuecomment-137308644
+#export PATH="$HOME/.local/bin:$PATH"
+pathadd "$HOME/.local/bin"
+export PATH=$PATH
+
+if [[ -f $POWERLINE_HOME/bindings/bash/powerline.sh ]]; then
+    # shellcheck disable=SC1091
+    . $POWERLINE_HOME/bindings/bash/powerline.sh
+fi

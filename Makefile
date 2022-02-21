@@ -30,6 +30,7 @@ dotdirs:
 	done;
 
 etc:
+	sudo mkdir -p /etc/docker/seccomp
 	# add symlinks for etc
 	# Note (jc): since hard-link can't be created between filesystem (home and system are different partition)
 	#            let's use symbolic link

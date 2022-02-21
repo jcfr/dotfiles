@@ -1,0 +1,93 @@
+#!/usr/bin/env aptfile
+# shellcheck disable=SC2181
+
+#
+# See https://github.com/seatgeek/bash-aptfile
+#
+
+package "atool"
+package "python3-pip"
+package "compizconfig-settings-manager" # See http://askubuntu.com/questions/89946/open-application-in-specific-workspace
+
+
+
+# Clear and Regenerate Font Cache
+update_font_db() {
+  fc-cache -s \
+    && mkfontscale ~/.local/share/fonts/ \
+    && mkfontdir ~/.local/share/fonts/
+  [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to clear and regenerate font cache${APTFILE_COLOR_OFF}"
+  log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Font cache regenerated"
+}
+
+# See https://github.com/chrissimpkins/Hack/blob/master/docs/INSTALLATION.md#manual-installation-on-linux
+install_hack_font() {
+  [[ $TRACE ]] && set -x
+
+  LOCAL_FONT_DIR=$HOME/.local/share/fonts/
+
+  [[ -f ${LOCAL_FONT_DIR}/Hack-Regular.ttf ]] \
+    && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Hack fonts found in ${LOCAL_FONT_DIR}" \
+    && return 0
+
+  ARCHIVE=Hack-v2_020-ttf.zip
+  mkdir -p "${LOCAL_FONT_DIR}" \
+    && curl --progress-bar -o /tmp/HackFonts.zip -L https://github.com/chrissimpkins/Hack/releases/download/v2.020/${ARCHIVE} \
+    && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Hack fonts downloaded"
+  [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to download ${ARCHIVE}${APTFILE_COLOR_OFF}"
+
+  aunpack -X  /tmp/HackFonts --quiet /tmp/HackFonts.zip
+  [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to copy font files to ${LOCAL_FONT_DIR}${APTFILE_COLOR_OFF}"
+  
+  mv /tmp/HackFonts/* "${LOCAL_FONT_DIR}"
+  [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to extract ${ARCHIVE}${APTFILE_COLOR_OFF}"
+
+  log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Hack fonts installed"
+}
+
+install_hack_font
+update_font_db
+
+# See https://powerline.readthedocs.io/
+pip3 install --quiet --user powerline-status || log_fail "${APTFILE_RED}WARNING: Failed to pip install powerline-status${APTFILE_COLOR_OFF}"
+log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} powerline-status installed"
+
+
+install_entr() {
+  # See http://entrproject.org/
+  which entr > /dev/null \
+    && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} entr installed" \
+    || (
+        cd /tmp \
+        && wget -L http://entrproject.org/code/entr-3.7.tar.gz -O /tmp/entr-3.7.tar.gz \
+        && rm -rf entr \
+        && mkdir -p entr \
+        && tar --strip-components=1 -C ./entr -xzvf entr-3.7.tar.gz \
+        && cd entr \
+        && ./configure \
+        && make \
+        && cp entr ~/.local/bin/  \
+        && rm -rf /tmp/entr* \
+        && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} entr installed" \
+        || log_fail "${APTFILE_RED}WARNING: Failed to install 'entr'${APTFILE_COLOR_OFF}"
+      )
+}
+
+install_entr
+
+install_fd() {
+  # See https://github.com/sharkdp/fd
+  which fd > /dev/null \
+    && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} fd installed" \
+    || (
+        cd $HOME/Software \
+        && wget -L https://github.com/sharkdp/fd/releases/download/v7.1.0/fd-v7.1.0-x86_64-unknown-linux-gnu.tar.gz  -O fd-v7.1.0-x86_64-unknown-linux-gnu.tar.gz \
+        && aunpack -q fd-v7.1.0-x86_64-unknown-linux-gnu.tar.gz \
+        && ln -s $HOME/Software/fd-v7.1.0-x86_64-unknown-linux-gnu/fd $HOME/bin/fd \
+        && fd > /dev/null
+       )
+}
+
+install_fd
+
+echo "🚀  ALL GOOD TO GO"

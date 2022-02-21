@@ -25,7 +25,7 @@
 
   # Show verbose output about tags, branches or remotes
   tags = tag -l
-  branches = branch -a
+  branches = !legit branches
   remotes = remote -v
 
   # Enable or disabled signed commit
@@ -70,8 +70,11 @@
 [url "git@github.com:"]
   pushInsteadOf = "git://github.com/"
 
-#[url "git@github.com:"]
-#  pushInsteadOf = "https://github.com/"
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"
+
+#[url "git@gitlab.kitware.com:"]
+#  pushInsteadOf = "https://gitlab.kitware.com/"
 
 [credential]
   helper = cache
@@ -79,15 +82,18 @@
 [credential "https://github.com"]
   user = jcfr
 
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = false
-
+#[url "https://gitlab.kitware.com/vtk/vtk-m.git"]
+#	insteadOf = git@gitlab.kitware.com:vtk/vtk-m.git
 
 [advice]
 	detachedHead = false
 
 [gui]
 	encoding = utf-8
+#[filter "lfs"]
+#	process = git-lfs filter-process
+#	required = true
+#	clean = git-lfs clean -- %f
+#	smudge = git-lfs smudge -- %f
+[url "git@gitlab.kitware.com:"]
+	insteadOf = https://gitlab.kitware.com/

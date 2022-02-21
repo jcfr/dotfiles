@@ -17,3 +17,22 @@ fi
 # Cache for project build
 export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
 mkdir -p "$ExternalData_OBJECT_STORES"
+
+# Qt4
+export QT_QMAKE_EXECUTABLE=/home/jcfr/Support/qt-everywhere-opensource-build-4.8.7/bin/qmake
+
+# Qt5
+export Qt5_DIR=/home/jcfr/Software/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5
+
+# Streamline Slicer extension build
+export Slicer_R_DIR=/home/jcfr/Projects/Slicer-Release/Slicer-build
+export Slicer_RD_DIR=/home/jcfr/Projects/Slicer-RelWithDebInfo/Slicer-build
+
+# Cleanup
+unset Slicer_Qt5_R_DIR
+unset Slicer_Qt5_RD_DIR
+unset Slicer_Qt4_DIR
+#export Slicer_Qt5_R_DIR=/home/jcfr/Projects/Slicer-Qt5-VTK8-Release/Slicer-build
+#export Slicer_Qt5_RD_DIR=/home/jcfr/Projects/Slicer-Qt5-VTK8-RelWithDebInfo/Slicer-build
+#export Slicer_Qt4_DIR=/home/jcfr/Projects/Slicer-Qt4-VTK7-Release/Slicer-build
+
