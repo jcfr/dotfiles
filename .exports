@@ -10,6 +10,7 @@ then
 else
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/Projects
+  # shellcheck disable=SC2034
   VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
   # shellcheck source=/dev/null
   source /usr/local/bin/virtualenvwrapper.sh
