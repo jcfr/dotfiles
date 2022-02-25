@@ -231,7 +231,7 @@ convert_vtkSmartPointer_to_vtkNew(){
 # Remove the last command from the history
 # See https://unix.stackexchange.com/a/233625/153286
 forget() {
-  history -d $( history | awk 'END{print $1-1}' )
+  history -d "$( history | awk 'END{print $1-1}' )"
 }
 
 # See http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-4.html
