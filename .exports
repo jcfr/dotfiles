@@ -18,3 +18,9 @@ fi
 # Cache for project build
 export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
 mkdir -p "$ExternalData_OBJECT_STORES"
+
+# Qt5
+export Qt5_DIR=/home/jcfr/Support/Qt/5.15.2/gcc_64/lib/cmake/Qt5
+
+# Streamline Slicer extension build
+export Slicer_R_DIR=/home/jcfr/Projects/Slicer-Release/Slicer-build
