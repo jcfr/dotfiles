@@ -27,4 +27,6 @@ for conf_file in $(ack --type-add=remmina:ext:remmina --remmina protocol=SSH -l)
   echo "${alias_cmd}" >> "${output}"
 done
 
+sort -o "${output}" "${output}"
+
 popd > /dev/null
