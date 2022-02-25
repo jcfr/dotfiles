@@ -1,0 +1,24 @@
+name: shellcheck
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: shellchecks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: shellcheck
+        uses: addnab/docker-run-action@v3
+        with:
+          registry: registry.hub.docker.com
+          image: r.j3ss.co/shellcheck
+          options: -v ${{ github.workspace }}:/work:ro --workdir /work
+          run: |
+            ./test.sh
