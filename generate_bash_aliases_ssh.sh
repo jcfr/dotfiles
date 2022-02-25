@@ -2,6 +2,15 @@
 
 set -eo pipefail
 
+PROG_NAME=$( basename "${BASH_SOURCE[0]}" )
+
+conf_directory=${HOME}/.remmina
+
+if [[ ! -d "${conf_directory}" ]]; then
+  echo "[${PROG_NAME}] skipping: '${conf_directory}' does not exist"
+  exit 0
+fi
+
 output=~/.bash_aliases_ssh
 
 echo -n "" > ${output}
