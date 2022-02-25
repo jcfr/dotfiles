@@ -169,13 +169,6 @@ validate_ci_configs() {
   else
     echo ".circleci/config.yml not found"
   fi
-
-  if [[ .travis.yml ]]; then
-    travis-cli lint .travis.yml
-  else
-    echo ".travis.yml not found"
-  fi
-
 }
 
 expand_tabs_as_n_spaces() {

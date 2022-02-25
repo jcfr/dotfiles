@@ -2,9 +2,9 @@
 dotfiles
 ========
 
-.. image:: https://travis-ci.org/jcfr/dotfiles.svg?branch=master
-  :target: https://travis-ci.org/jcfr/dotfiles
-  :alt: Travis CI
+.. image:: https://github.com/jcfr/dotfiles/actions/workflows/shellcheck.yml/badge.svg
+  :target: https://github.com/jcfr/dotfiles/actions/workflows/shellcheck.yml
+  :alt: GitHub Actions
 
 The organization of this project is based on the great work of `@jessfraz <https://github.com/jessfraz>`_.
 See `here <https://github.com/jessfraz/dotfiles>`_ for the original project.
