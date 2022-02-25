@@ -187,7 +187,7 @@ expand_tabs_as_two_spaces() {
     echo "Usage: expand_tabs_as_two_spaces file ..."
     return 1
   fi
-  for file in $@; do
+  for file in "$@"; do
     expand_tabs_as_n_spaces 2 "${file}"
   done
 }
@@ -197,7 +197,7 @@ expand_tabs_as_four_spaces() {
     echo "Usage: expand_tabs_as_four_spaces file ..."
     return 1
   fi
-  for file in $@; do
+  for file in "$@"; do
     expand_tabs_as_n_spaces 4 "${file}"
   done
 }
@@ -207,7 +207,7 @@ strip_trailing_whitespaces() {
     echo "Usage: strip_trailing_whitespaces file ..."
     return 1
   fi
-  for file in $@; do
+  for file in "$@"; do
     sed -i 's/[ \t]*$//' "${file}"
   done
 }
