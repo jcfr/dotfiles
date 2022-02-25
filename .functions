@@ -150,7 +150,7 @@ watchandrun() {
 }
 
 pathadd() {
-    if [ -d "$1" ] && ! echo $PATH | grep -E -q "(^|:)$1($|:)" ; then
+    if [ -d "$1" ] && ! echo "$PATH" | grep -E -q "(^|:)$1($|:)" ; then
         if [ "$2" = "after" ] ; then
             PATH="$PATH:${1%/}"
         else
@@ -160,7 +160,7 @@ pathadd() {
 }
 
 pathrm() {
-    PATH="$(echo ${PATH} | sed -e "s;\(^\|:\)${1%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
+    PATH="$(echo "${PATH}" | sed -e "s;\(^\|:\)${1%/}\(:\|\$\);\1\2;g" -e 's;^:\|:$;;g' -e 's;::;:;g')"
 }
 
 validate_ci_configs() {
@@ -179,7 +179,7 @@ expand_tabs_as_n_spaces() {
   number_of_space=$1
   input_file="$2"
   output_file="${input_file}"
-  tmp=`mktemp` && expand -t ${number_of_space} "${input_file}" > "${tmp}" && mv "${tmp}" "${output_file}"
+  tmp=$(mktemp) && expand -t "${number_of_space}" "${input_file}" > "${tmp}" && mv "${tmp}" "${output_file}"
 }
 
 expand_tabs_as_two_spaces() {
@@ -224,7 +224,7 @@ list_text_files_recursively() {
 convert_vtkSmartPointer_to_vtkNew(){
   for f in $(ack "vtkSmartPointer\<vtk\w+\> \w+\s*\=\s*vtkSmartPointer\<vtk\w+\>::New\(\);" -l); do \
     echo "Processing $f"; \
-    sed -i -E 's/vtkSmartPointer.(vtk\w+). (\w+)\s*\=\s*vtkSmartPointer.vtk\w+.::New\(\);/vtkNew<\1> \2;/g'  $f; \
+    sed -i -E 's/vtkSmartPointer.(vtk\w+). (\w+)\s*\=\s*vtkSmartPointer.vtk\w+.::New\(\);/vtkNew<\1> \2;/g'  "$f"; \
   done
 }
 
