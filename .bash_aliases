@@ -16,9 +16,6 @@ alias rb='touch -d"-30min"'
 # Allow gdb to attach to running processes
 alias gdb-enable-attach='echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope'
 
-# AOSP root
-export AOSP_VOL=~/Projects/aosp-root/
-
 # Start/Stop container serving jupyter based of 'scipy-notebook' stack.
 stack=jupyter/scipy-notebook
 
