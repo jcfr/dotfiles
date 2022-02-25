@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # General
-alias ack='ack-grep'
 
 # See http://www.workingwith.me.uk/blog/a_useful_cvs_status_checker
 alias cvs-status='cvs -q status | grep ^[?F] | grep -v "to-date"'
