@@ -16,10 +16,6 @@ alias rb='touch -d"-30min"'
 # Allow gdb to attach to running processes
 alias gdb-enable-attach='echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope'
 
-# Gdrive
-alias mount-kw-gdrive='google-drive-ocamlfuse -label kitware ~/mnt/gdrive-kitware/'
-alias umount-kw-gdrive='fusermount -u ~/mnt/gdrive-kitware/'
-
 # AOSP root
 export AOSP_VOL=~/Projects/aosp-root/
 
