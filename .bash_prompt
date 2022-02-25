@@ -49,3 +49,9 @@ function __smart_git_ps1 {
 
 # the prompt itself
 PS1='\[\e[32m\]\u@\[\e[1m\]\h\[\e[22m\]:\[\e[1;34m\]\W\[\e[22;35m\]$(__smart_git_ps1 " [\[\e[33m\]$(__smart_git_status_flag)\[\e[35m\]%s]")\[\e[33m\] \$ \[\e[0m\]'
+
+# See https://gist.github.com/joeizang/05bc2e0d7d2d1d4d50c03ffef575ac31
+if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+    # shellcheck disable=SC1091
+    source /usr/share/powerline/bindings/bash/powerline.sh
+fi
