@@ -1,0 +1,47 @@
+#!/usr/bin/env aptfile
+# shellcheck disable=SC2181
+
+#
+# See https://github.com/seatgeek/bash-aptfile
+#
+
+package "atool"
+package "ddd"
+package "hub"
+package "meld"
+package "powerline"
+package "fonts-powerline"
+package "entr"
+package "fd-find"
+
+# See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
+package "python3-pip"
+pip3 install virtualenvwrapper
+
+# See https://askubuntu.com/questions/1352867/replacement-for-compiz-config-settings-manager-in-ubuntu-20-04
+#package "compizconfig-settings-manager" # See http://askubuntu.com/questions/89946/open-application-in-specific-workspace
+
+# Clear and Regenerate Font Cache
+update_font_db() {
+  fc-cache -s \
+    && mkfontscale ~/.local/share/fonts/ \
+    && mkfontdir ~/.local/share/fonts/
+  [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to clear and regenerate font cache${APTFILE_COLOR_OFF}"
+  log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Font cache regenerated"
+}
+
+#update_font_db
+
+install_cmake_auto_style() {
+  script=cmake-auto-style-install \
+  && echo "Installing ${script}" \
+  && curl -# https://raw.githubusercontent.com/jcfr/cmake-auto-style/master/${script}.sh -o ${HOME}/bin/${script} \
+  && chmod +x ${HOME}/bin/${script} \
+  && cmake-auto-style-install \
+  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} cmake-auto-style installed" \
+  || log_fail "${APTFILE_RED}WARNING: Failed to install 'cmake-auto-style'${APTFILE_COLOR_OFF}"
+}
+
+install_cmake_auto_style
+
+echo "🚀  ALL GOOD TO GO"

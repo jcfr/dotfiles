@@ -2,12 +2,21 @@
 
 all: bin dotdirs dotfiles etc
 
-bin:
-	# add symlinks for things in bin
-	for file in $(shell find $(CURDIR)/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
+usr-local-bin:
+	# add symlinks for bin available for all users
+	for file in $(shell find $(CURDIR)/usr/local/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
 		f=$$(basename $$file); \
 		echo "[bin] /usr/local/bin/$$f"; \
 		sudo ln -sf $$file /usr/local/bin/$$f; \
+	done
+
+bin: usr-local-bin
+	# add symlinks for bin private to user
+	mkdir -p $(HOME)/bin
+	for file in $(shell find $(CURDIR)/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
+		f=$$(basename $$file); \
+		echo "[bin] $(HOME)/bin/$$f"; \
+		ln -sf $$file $(HOME)/bin/$$f; \
 	done
 
 generate_bash_aliases_ssh:

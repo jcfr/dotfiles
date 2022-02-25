@@ -10,8 +10,9 @@ then
 else
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/Projects
+  VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
   # shellcheck source=/dev/null
-  source ~/.local/bin/virtualenvwrapper.sh
+  source /usr/local/bin/virtualenvwrapper.sh
 fi
 
 # Cache for project build
