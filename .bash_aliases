@@ -39,6 +39,7 @@ alias dockerlint='docker run -it --rm -v "$(pwd)/Dockerfile":/Dockerfile:ro redc
 # Run cmake/ccmake/ctest/cpack/cmake-gui executable associated with the current build tree. The "h" stands for "here"
 # and allows for quick auto-completion since there was no command starting with "hc"
 for target in cmake ccmake ctest cpack cmake-gui; do
+  # shellcheck disable=SC2139
   alias h${target}='$(cat CMakeCache.txt  | ack CMAKE_COMMAND | cut -d= -f2 | xargs dirname)/'${target}
 done
 
