@@ -37,7 +37,7 @@ install_cmake_auto_style() {
   && echo "Installing ${script}" \
   && curl -# https://raw.githubusercontent.com/jcfr/cmake-auto-style/master/${script}.sh -o ${HOME}/bin/${script} \
   && chmod +x ${HOME}/bin/${script} \
-  && cmake-auto-style-install \
+  && ${HOME}/bin/${script} \
   && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} cmake-auto-style installed" \
   || log_fail "${APTFILE_RED}WARNING: Failed to install 'cmake-auto-style'${APTFILE_COLOR_OFF}"
 }
