@@ -61,3 +61,9 @@ need to install anything. They run in a container.
 
   $ make test
 
+
+Troubleshoot
+============
+
+* Powerline git status does not show up. See `Reloading powerline after update <https://powerline.readthedocs.io/en/master/tips-and-tricks.html#reloading-powerline-after-update>`_
+
