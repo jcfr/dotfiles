@@ -10,6 +10,10 @@ if which hub >/dev/null ; then
   eval "$(hub alias -s)"
 fi
 
+# See https://github.com/sharkdp/fd#installation
+# and https://www.baeldung.com/linux/fd-find-alternative
+alias fd=fdfind
+
 # Rollback modified time
 alias rb='touch -d"-30min"'
 
