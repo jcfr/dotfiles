@@ -22,7 +22,7 @@ This will create symlinks from this repo to your home folder.
 
 ::
 
-  $ sudo ./aptfile
+  $ make aptfile
 
 This will install packages like powerline, python, virtualenwrapper, ...
 
