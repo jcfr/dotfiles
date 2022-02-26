@@ -47,7 +47,7 @@ etc:
 		echo "[etc] $$f"; \
 		sudo ln -sfn $$file $$f; \
 	done;
-	systemctl --user daemon-reload
+	systemctl --user daemon-reload || true
 	sudo systemctl daemon-reload
 
 test: shellcheck
