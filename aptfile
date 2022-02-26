@@ -22,11 +22,20 @@ pip3 install virtualenvwrapper
 # See https://askubuntu.com/questions/1352867/replacement-for-compiz-config-settings-manager-in-ubuntu-20-04
 #package "compizconfig-settings-manager" # See http://askubuntu.com/questions/89946/open-application-in-specific-workspace
 
+# Clear log
+> $TMP_APTFILE_LOGFILE
+
+# Check HOME variable
+HOME=${OVERRIDE_HOME:-$HOME}
+log_info "${APTFILE_GREEN}[INFO]${APTFILE_COLOR_OFF} HOME is '${HOME}'"
+
+[[ "${HOME}" == "/root" ]] && log_fail "ERROR: Cannot install scripts for '/root': Consider setting OVERRIDE_HOME=/home/user."
+
 # Clear and Regenerate Font Cache
 update_font_db() {
   fc-cache -s \
-    && mkfontscale ~/.local/share/fonts/ \
-    && mkfontdir ~/.local/share/fonts/
+    && mkfontscale ${HOME}/.local/share/fonts/ \
+    && mkfontdir ${HOME}/.local/share/fonts/
   [[ $? -eq 0 ]] || log_fail "${APTFILE_RED}WARNING: Failed to clear and regenerate font cache${APTFILE_COLOR_OFF}"
   log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} Font cache regenerated"
 }

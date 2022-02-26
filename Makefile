@@ -2,6 +2,10 @@
 .PHONY: all
 all: bin dotdirs dotfiles etc
 
+.PHONY: aptfile
+aptfile:
+	sudo OVERRIDE_HOME=$(HOME) aptfile
+
 .PHONY: usr-local-bin
 usr-local-bin:
 	# add symlinks for bin available for all users
