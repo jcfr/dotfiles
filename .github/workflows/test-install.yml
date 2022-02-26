@@ -13,7 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: |
+      - name: make
+        run: |
           export DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --session --print-address --fork`
           make
-      - run: ./aptfile
+      - name: aptfile
+        run: ./aptfile
