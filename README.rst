@@ -34,6 +34,11 @@ Save env vars, etc in a ``.extra`` file, that looks something like
 this::
 
   ###
+  ### Customization
+  ###
+  PROMPT_USE_POWERLINE=false # Disable use of powerline (enabled by default)
+
+  ###
   ### Git credentials
   ###
 
