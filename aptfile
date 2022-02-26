@@ -6,6 +6,7 @@
 #
 
 package "atool"
+package "clang-tidy-10"
 package "ddd"
 package "entr"
 package "fd-find"
