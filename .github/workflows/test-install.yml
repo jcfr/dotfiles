@@ -17,6 +17,7 @@ jobs:
         run: |
           export DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --session --print-address --fork`
           echo "DBUS_SESSION_BUS_ADDRESS: ${DBUS_SESSION_BUS_ADDRESS}"
+          systemctl --user status
           sudo make
       - name: aptfile
         run: |
