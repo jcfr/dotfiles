@@ -7,13 +7,13 @@
 
 package "atool"
 package "ddd"
+package "entr"
+package "fd-find"
+package "fonts-powerline"
 package "hub"
 package "meld"
 package "powerline"
 package "powerline-gitstatus"
-package "fonts-powerline"
-package "entr"
-package "fd-find"
 
 # See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
 package "python3-pip"
