@@ -15,8 +15,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: make
         run: |
+          loginctl enable-linger runner
+          sleep 1
+
           export DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --session --print-address --fork`
           echo "DBUS_SESSION_BUS_ADDRESS: ${DBUS_SESSION_BUS_ADDRESS}"
+
+          export XDG_RUNTIME_DIR=/run/user/${UID}
+          echo "XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR}"
+
           systemctl --user status
           sudo make
       - name: aptfile
