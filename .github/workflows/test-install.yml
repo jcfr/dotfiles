@@ -13,6 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: make
         run: |
           loginctl enable-linger runner
@@ -25,7 +26,9 @@ jobs:
           echo "XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR}"
 
           systemctl --user status
-          sudo make
+
+          make
+
       - name: aptfile
         run: |
-          sudo ./aptfile
+          make aptfile
