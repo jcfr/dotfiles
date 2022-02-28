@@ -11,10 +11,13 @@ package "ddd"
 package "entr"
 package "fd-find"
 package "fonts-powerline"
+package "gedit-plugins"
 package "hub"
 package "meld"
+package "openssh-server"
 package "powerline"
 package "powerline-gitstatus"
+package "tofrodos"
 
 # See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
 package "python3-pip"
