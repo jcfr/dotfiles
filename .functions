@@ -179,7 +179,10 @@ expand_tabs_as_n_spaces() {
   number_of_space=$1
   input_file="$2"
   output_file="${input_file}"
-  tmp=$(mktemp) && expand -t "${number_of_space}" "${input_file}" > "${tmp}" && mv "${tmp}" "${output_file}"
+  tmp=$(mktemp) && expand -t "${number_of_space}" "${input_file}" > "${tmp}" \
+    && chmod --reference="${output_file}" "${tmp}" \
+    && chown --reference="${output_file}" "${tmp}" \
+    && mv "${tmp}" "${output_file}"
 }
 
 expand_tabs_as_two_spaces() {
