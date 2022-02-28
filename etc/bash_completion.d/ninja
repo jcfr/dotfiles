@@ -40,19 +40,19 @@ _ninja_target() {
 
     if [[ "$cur" == "--"* ]]; then
         # there is currently only one argument that takes --
-	COMPREPLY=($(compgen -P '--' -W 'version' -- "${cur:2}"))
+  COMPREPLY=($(compgen -P '--' -W 'version' -- "${cur:2}"))
     else
-	dir="."
-	line=$(echo ${COMP_LINE} | cut -d" " -f 2-)
+  dir="."
+  line=$(echo ${COMP_LINE} | cut -d" " -f 2-)
         # filter out all non relevant arguments but keep C for dirs
-	while getopts :C:f:j:l:k:nvd:t: opt $line; do
-	    case $opt in
+  while getopts :C:f:j:l:k:nvd:t: opt $line; do
+      case $opt in
                 # eval for tilde expansion
-		C) eval dir="$OPTARG" ;;
-	    esac
-	done;
-	targets_command="eval ninja -C \"${dir}\" -t targets all 2>/dev/null | cut -d: -f1"
-	COMPREPLY=($(compgen -W '`${targets_command}`' -- "$cur"))
+    C) eval dir="$OPTARG" ;;
+      esac
+  done;
+  targets_command="eval ninja -C \"${dir}\" -t targets all 2>/dev/null | cut -d: -f1"
+  COMPREPLY=($(compgen -W '`${targets_command}`' -- "$cur"))
     fi
     return
 }
