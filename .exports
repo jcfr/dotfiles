@@ -18,6 +18,15 @@ else
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+# https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
+# https://github.com/sindresorhus/guides/blob/main/npm-global-without-sudo.md
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
 # Cache for project build
 export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
 mkdir -p "$ExternalData_OBJECT_STORES"
