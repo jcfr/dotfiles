@@ -22,6 +22,7 @@ package "python3.8-venv"
 package "powerline"
 package "powerline-gitstatus"
 package "tofrodos"
+package "zstd"
 
 # See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
 package "python3-pip"
