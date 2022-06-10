@@ -58,6 +58,18 @@ scp_from_${name}() {
 }
 FUNCTION_SCP_FROM_EOF
 
+    cat << FUNCTION_SCP_TO_EOF
+scp_to_${name}() {
+  if [[ ! "\$#" -eq 2 ]]; then
+    echo "Usage: scp_to_${name} local_dst remote_src"
+    return 1
+  fi
+  local_dst=\$1
+  remote_src=\$2
+  scp \$local_dst ${user}@${host}:\$remote_src
+}
+FUNCTION_SCP_TO_EOF
+
     cat << FUNCTION_SSH_LS_EOF
 ssh_ls_${name}() {
   if [[ ! "\$#" -eq 1 ]]; then
