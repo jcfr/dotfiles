@@ -14,7 +14,7 @@ Installation
 
 ::
 
-  $ git clone --recurse-submodules git://github.com/jcfr/dotfiles
+  $ git clone --recurse-submodules git@github.com:jcfr/dotfiles
   $ cd dotfiles
   $ make
 
