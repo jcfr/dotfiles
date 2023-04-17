@@ -13,8 +13,23 @@ package "entr"
 package "fd-find"
 package "fonts-powerline"
 package "gedit-plugins"
-package "git-gui"
-package "gitk"
+
+# See https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+if [[ "$CI" == "false" ]]; then
+  package "git-gui"
+  package "gitk"
+else
+  # Attempting to install these packages in the context of GitHub Actions reports message
+  # like the following:
+  #
+  #   E: Unable to correct problems, you have held broken packages.
+  #   dpkg-query: package 'git-gui' is not installed and no information is available
+  #   Use dpkg --info (= dpkg-deb --info) to examine archive files.
+  #
+  log_info "${APTFILE_YELLOW}[SKIP]${APTFILE_COLOR_OFF} git-gui (not installable within GitHub Actions)"
+  log_info "${APTFILE_YELLOW}[SKIP]${APTFILE_COLOR_OFF} gitk (not installable within GitHub Actions)"
+fi
+
 package "git-lfs"
 #package "hub"  # Consider installing latest "hub X.Y.Z for Linux 64-bit" from https://github.com/github/hub/releases
 package "jq"
