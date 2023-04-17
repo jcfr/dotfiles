@@ -1,10 +1,11 @@
+CI ?= false
 
 .PHONY: all
 all: bin dotdirs dotfiles etc
 
 .PHONY: aptfile
 aptfile:
-	sudo OVERRIDE_HOME=$(HOME) aptfile
+	sudo CI=$(CI) OVERRIDE_HOME=$(HOME) aptfile
 
 .PHONY: usr-local-bin
 usr-local-bin:

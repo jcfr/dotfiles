@@ -15,7 +15,7 @@ package "fonts-powerline"
 package "gedit-plugins"
 
 # See https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
-if [[ "$CI" == "false" ]]; then
+if [[ "$CI" != "true" ]]; then
   package "git-gui"
   package "gitk"
 else
