@@ -12,8 +12,8 @@ package "entr"
 package "fd-find"
 package "fonts-powerline"
 package "gedit-plugins"
-packaeg "git-lfs"
-package "hub"
+package "git-lfs"
+#package "hub"  # Consider installing latest "hub X.Y.Z for Linux 64-bit" from https://github.com/github/hub/releases
 package "jq"
 package "meld"
 package "net-tools"
@@ -22,6 +22,7 @@ package "python3.8-venv"
 package "powerline"
 package "powerline-gitstatus"
 package "tofrodos"
+package "unifont" # Prevent gitk crashes when viewing commit containing emoji
 package "zstd"
 
 # See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
