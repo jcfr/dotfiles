@@ -5,6 +5,7 @@
 # See https://github.com/seatgeek/bash-aptfile
 #
 
+package "ack"
 package "atool"
 package "clang-tidy-10"
 package "ddd"
@@ -12,6 +13,7 @@ package "entr"
 package "fd-find"
 package "fonts-powerline"
 package "gedit-plugins"
+package "gitk"
 package "git-lfs"
 #package "hub"  # Consider installing latest "hub X.Y.Z for Linux 64-bit" from https://github.com/github/hub/releases
 package "jq"
