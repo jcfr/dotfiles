@@ -48,6 +48,10 @@ package "zstd"
 package "python3-pip"
 pip3 install virtualenvwrapper
 
+# See https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+ppa "deadsnakes/ppa"
+package "python3.9"
+
 # See https://askubuntu.com/questions/1352867/replacement-for-compiz-config-settings-manager-in-ubuntu-20-04
 #package "compizconfig-settings-manager" # See http://askubuntu.com/questions/89946/open-application-in-specific-workspace
 
