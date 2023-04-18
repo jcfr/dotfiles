@@ -77,14 +77,31 @@ update_font_db() {
 
 install_cmake_auto_style() {
   script=cmake-auto-style-install \
+  && tool=cmake-auto-style \
   && echo "Installing ${script}" \
   && curl -# https://raw.githubusercontent.com/jcfr/cmake-auto-style/master/${script}.sh -o ${HOME}/bin/${script} \
   && chmod +x ${HOME}/bin/${script} \
   && ${HOME}/bin/${script} \
-  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} cmake-auto-style installed" \
-  || log_fail "${APTFILE_RED}WARNING: Failed to install 'cmake-auto-style'${APTFILE_COLOR_OFF}"
+  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} ${tool} installed" \
+  || log_fail "${APTFILE_RED}WARNING: Failed to install '${tool}'${APTFILE_COLOR_OFF}"
+}
+
+install_hub() {
+  tool=hub \
+  && version=2.14.2 \
+  && echo "Installing ${tool} ${version}" \
+  && cd /tmp \
+  && curl -L# https://github.com/github/hub/releases/download/v${version}/hub-linux-amd64-${version}.tgz -o /tmp/hub-linux-amd64-${version}.tgz \
+  && aunpack hub-linux-amd64-${version}.tgz \
+  && rm -rf /tmp/hub-linux-amd64-${version}.tgz \
+  && cd hub-linux-amd64-${version} \
+  && sudo prefix=/usr/local ./install \
+  && rm -rf /tmp/hub-linux-amd64-${version} \
+  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} ${tool} installed" \
+  || log_fail "${APTFILE_RED}WARNING: Failed to install '${tool}'${APTFILE_COLOR_OFF}"
 }
 
 install_cmake_auto_style
+install_hub
 
 echo "🚀  ALL GOOD TO GO"
