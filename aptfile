@@ -90,15 +90,19 @@ install_hub() {
   tool=hub \
   && version=2.14.2 \
   && echo "Installing ${tool} ${version}" \
-  && cd /tmp \
+  && command -v hub &> /dev/null \
+  && log_info "${APTFILE_YELLOW}[SKIP]${APTFILE_COLOR_OFF} ${tool} *already* installed" \
+  || (
+  cd /tmp \
   && curl -L# https://github.com/github/hub/releases/download/v${version}/hub-linux-amd64-${version}.tgz -o /tmp/hub-linux-amd64-${version}.tgz \
   && aunpack hub-linux-amd64-${version}.tgz \
   && rm -rf /tmp/hub-linux-amd64-${version}.tgz \
   && cd hub-linux-amd64-${version} \
   && sudo prefix=/usr/local ./install \
   && rm -rf /tmp/hub-linux-amd64-${version} \
-  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} ${tool} installed" \
-  || log_fail "${APTFILE_RED}WARNING: Failed to install '${tool}'${APTFILE_COLOR_OFF}"
+  && log_info "${APTFILE_CYAN}[OK]${APTFILE_COLOR_OFF} ${tool} ${version} installed" \
+  || log_fail "${APTFILE_RED}WARNING: Failed to install '${tool}'${APTFILE_COLOR_OFF}" \
+  )
 }
 
 install_cmake_auto_style
