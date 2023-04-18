@@ -41,7 +41,7 @@ dotfiles: generate_bash_aliases_ssh
 
 .PHONY: dotdirs
 dotdirs:
-	for file in $(shell find ".config/" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
+	for file in $(shell find ".config/" ".gnupg/" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
 		f=$$file; \
 		mkdir -p $$(dirname $(HOME)/$$f); \
 		echo "[dotdir] $(HOME)/$$f <- $(CURDIR)/$$f"; \
