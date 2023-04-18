@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Chatbot UI
+Comment=Advanced chatbot kit for OpenAI's chat models
+GenericName=Chatbot
+Keywords=ChatbotUI;AI
+Exec=/home/jcfr/Projects/chatbot-ui/chatbot-ui-start.sh
+Terminal=true
+Type=Application
+Icon=/home/jcfr/Projects/chatbot-ui/public/favicon.ico
+Categories=AI;Chatbot;
