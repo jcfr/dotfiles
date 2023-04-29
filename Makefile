@@ -1,7 +1,7 @@
 CI ?= false
 
 .PHONY: all
-all: bin dotdirs dotfiles etc desktop
+all: bin dotdirs dotfiles etc
 
 .PHONY: aptfile
 aptfile:
@@ -57,7 +57,7 @@ desktop:
 		echo "[desktop] $(HOME)/$$file <- $(CURDIR)/$$file"; \
 		ln -sfn $(CURDIR)/$$file $(HOME)/$$file; \
 		echo "[desktop] $$file (metadata::trusted true)"; \
-		dbus-launch gio set $(HOME)/$$file metadata::trusted true; \
+		gio set $(HOME)/$$file metadata::trusted true; \
 		desktop-file-validate $(HOME)/$$file; \
 	done;
 
