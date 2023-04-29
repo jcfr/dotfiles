@@ -1,7 +1,7 @@
 CI ?= false
 
 .PHONY: all
-all: bin dotdirs dotfiles etc
+all: bin dotdirs dotfiles etc desktop
 
 .PHONY: aptfile
 aptfile:
@@ -41,11 +41,24 @@ dotfiles: generate_bash_aliases_ssh
 
 .PHONY: dotdirs
 dotdirs:
-	for file in $(shell find ".config/" ".gnupg/" "Desktop" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
+	for file in $(shell find ".config/" ".gnupg/" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
 		f=$$file; \
 		mkdir -p $$(dirname $(HOME)/$$f); \
 		echo "[dotdir] $(HOME)/$$f <- $(CURDIR)/$$f"; \
 		ln -sfn $(CURDIR)/$$f $(HOME)/$$f; \
+	done;
+
+# References:
+# * https://askubuntu.com/questions/1218954/desktop-files-allow-launching-set-this-via-cli/1391903#1391903
+# * https://stackoverflow.com/questions/60074557/gnome-3-and-desktop-files-what-exactly-does-allow-disallow-lauching-do/73455006#73455006
+.PHONY: desktop
+desktop:
+	for file in $(shell find "Desktop" -name "*.desktop" -type f ); do \
+		echo "[desktop] $(HOME)/$$file <- $(CURDIR)/$$file"; \
+		ln -sfn $(CURDIR)/$$file $(HOME)/$$file; \
+		echo "[desktop] $$file (metadata::trusted true)"; \
+		dbus-launch gio set $(HOME)/$$file metadata::trusted true; \
+		desktop-file-validate $(HOME)/$$file; \
 	done;
 
 .PHONY: etc
