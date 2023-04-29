@@ -22,9 +22,9 @@ This will create symlinks from this repo to your home folder.
 
 ::
 
-  $ make aptfile
+  $ make aptfile desktop
 
-This will install packages like powerline, python, virtualenwrapper, ...
+This will install packages (e.g powerline, python, virtualenwrapper) and setup desktop launchers
 
 
 Customization

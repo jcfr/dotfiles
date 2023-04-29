@@ -9,6 +9,7 @@ package "ack"
 package "atool"
 package "clang-tidy-10"
 package "ddd"
+package "desktop-file-utils" # For desktop-file-validate used by the "desktop" target in this project's Makefile
 package "entr"
 package "fd-find"
 package "fonts-powerline"
@@ -43,6 +44,10 @@ package "tofrodos"
 package "unifont" # Prevent gitk crashes when viewing commit containing emoji
 package "vim"
 package "zstd"
+
+# To support running "AppImage"
+package "fuse"
+package "libfuse2"
 
 # See https://itnext.io/how-to-set-up-python-virtual-environment-on-ubuntu-20-04-a2c7a192938d
 package "python3-pip"
