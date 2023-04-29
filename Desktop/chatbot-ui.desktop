@@ -8,4 +8,4 @@ Exec=/home/jcfr/Projects/chatbot-ui/chatbot-ui-start.sh
 Terminal=true
 Type=Application
 Icon=/home/jcfr/Projects/chatbot-ui/public/favicon.ico
-Categories=AI;Chatbot;
+Categories=Education;ArtificialIntelligence;
