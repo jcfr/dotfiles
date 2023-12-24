@@ -63,6 +63,23 @@ pip3 install virtualenvwrapper
 ppa "deadsnakes/ppa"
 package "python3.9"
 
+# Install customized "terminator" version ensuring current working directory (cwd) is
+# saved when saving layout:
+#
+# (1) Download customized version into `$HOME/Projects/gnome-terminator`
+#     See https://github.com/gnome-terminator/terminator
+#
+# (2) Checkout https://github.com/jcfr/terminator/tree/save-layout-current-working-dir
+#
+# (3) Create virtual env. (e.g gnome-terminator-py39`), install and run from there
+#
+# This means we do not install the version available on ppa or it we do, similar patches
+# should be applied.
+#
+# Related private note file: `2023.05.15_gnome-terminal.txt`
+#ppa "mattrose/terminator"
+#package "terminator"
+
 # See https://askubuntu.com/questions/1352867/replacement-for-compiz-config-settings-manager-in-ubuntu-20-04
 #package "compizconfig-settings-manager" # See http://askubuntu.com/questions/89946/open-application-in-specific-workspace
 
