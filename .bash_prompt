@@ -47,6 +47,15 @@ function __smart_git_ps1 {
   fi
 }
 
+# Added to support running "gnome-terminator"
+# Installed through "libvte-2.91-common" package
+#
+# See comment in "aptfile"
+if [ -f /etc/profile.d/vte-2.91.sh ]; then
+  # shellcheck disable=SC1091
+  source /etc/profile.d/vte-2.91.sh
+fi
+
 PROMPT_USE_POWERLINE="${PROMPT_USE_POWERLINE:-true}"
 
 # the prompt itself
