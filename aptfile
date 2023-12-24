@@ -3,6 +3,7 @@
 
 #
 # See https://github.com/seatgeek/bash-aptfile
+# Script added to this project as "usr/local/bin/aptfile"
 #
 
 package "ack"
