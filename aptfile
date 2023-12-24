@@ -9,12 +9,16 @@
 package "ack"
 package "atool"
 package "clang-tidy-10"
+package "systemd-coredump" # For running "coredumpctl list"
 package "ddd"
 package "desktop-file-utils" # For desktop-file-validate used by the "desktop" target in this project's Makefile
 package "entr"
 package "fd-find"
 package "fonts-powerline"
 package "gedit-plugins"
+
+# See https://launchpad.net/~git-core/+archive/ubuntu/ppa
+ppa "git-core/ppa"
 
 # See https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 if [[ "$CI" != "true" ]]; then
@@ -41,6 +45,7 @@ package "openssh-server"
 package "python3.8-venv"
 package "powerline"
 package "powerline-gitstatus"
+package "ripgrep" # See https://github.com/BurntSushi/ripgrep/
 package "tofrodos"
 package "unifont" # Prevent gitk crashes when viewing commit containing emoji
 package "vim"
