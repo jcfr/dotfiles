@@ -33,6 +33,16 @@ if command -v rbenv &> /dev/null; then
   eval "$(rbenv init -)"
 fi
 
+
+# https://github.com/nvm-sh/nvm#installing-and-updating
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck disable=SC1091
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  # shellcheck disable=SC1091
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 # Cache for project build
 export ExternalData_OBJECT_STORES=$HOME/Projects/.ExternalData
 mkdir -p "$ExternalData_OBJECT_STORES"
