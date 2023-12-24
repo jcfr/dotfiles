@@ -1,2 +1,7 @@
 --type-add=ui:ext:ui
 --type-add=ipynb:ext:ipynb
+--type-add=cmake:ext:module
+--type-add=md:ext:md,markdown
+--type-add=mrml:ext:mrml
+--type-add=headers:ext:h,hxx,hpp
+--type-add=headers:match:h\.in
