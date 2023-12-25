@@ -35,4 +35,5 @@ jobs:
 
       - name: desktop
         run: |
+          mkdir -p $HOME/Desktop
           make desktop
