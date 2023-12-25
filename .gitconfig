@@ -83,7 +83,8 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
-  required = false
+  # required = true
+  required = false # Disable to speed up GitHub push
 
 
 [advice]
