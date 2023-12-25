@@ -76,6 +76,17 @@
 [url "git@gitlab.kitware.com:"]
   pushInsteadOf = "https://gitlab.kitware.com/"
 
+# References
+# - https://gitlab.ub.uni-giessen.de/jlugitlab/git-lfs-howto#practical-tips-how-to-use-git-lfs
+# - https://github.com/desktop/desktop/issues/2812#issuecomment-332239726
+#
+#  Remote "jcfr-gitlab" does not support the LFS locking API. Consider disabling it with:
+#  $ git config lfs.https://gitlab.kitware.com/vtk/vtk-examples.git/info/lfs.locksverify false
+#
+
+# git config lfs.locksverify false
+# https://gitlab.kitware.com/vtk/vtk-examples.git/info/lfs
+
 [credential]
   helper = cache
 
