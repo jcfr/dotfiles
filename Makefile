@@ -3,12 +3,16 @@ CI ?= false
 .PHONY: all
 all: bin dotdirs dotfiles etc
 
+#Suppress display of executed commands.
+$(VERBOSE).SILENT:
+
 .PHONY: aptfile
 aptfile:
 	sudo CI=$(CI) OVERRIDE_HOME=$(HOME) aptfile
 
 .PHONY: usr-local-bin
 usr-local-bin:
+	echo "-------------------------------------------------------------------------------"
 	# add symlinks for bin available for all users
 	for file in $(shell find $(CURDIR)/usr/local/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
 		f=$$(basename $$file); \
@@ -18,6 +22,7 @@ usr-local-bin:
 
 .PHONY: bin
 bin: usr-local-bin
+	echo "-------------------------------------------------------------------------------"
 	# add symlinks for bin private to user
 	mkdir -p $(HOME)/bin
 	for file in $(shell find $(CURDIR)/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
@@ -28,10 +33,12 @@ bin: usr-local-bin
 
 .PHONY: generate_bash_aliases_ssh
 generate_bash_aliases_ssh:
+	echo "-------------------------------------------------------------------------------"
 	$(CURDIR)/generate_bash_aliases_ssh.sh
 
 .PHONY: dotfiles
 dotfiles: generate_bash_aliases_ssh
+	echo "-------------------------------------------------------------------------------"
 	# add symlinks for dotfiles
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".config" -not -name ".gitignore" -not -name ".git" -not -name ".*.swp" -not -name ".irssi" -not -name ".gnupg"); do \
 		f=$$(basename $$file); \
@@ -41,6 +48,7 @@ dotfiles: generate_bash_aliases_ssh
 
 .PHONY: dotdirs
 dotdirs:
+	echo "-------------------------------------------------------------------------------"
 	for file in $(shell find ".config/" ".gnupg/" -type f -not -name ".*.swp" -not -path "*/.git*"); do \
 		f=$$file; \
 		mkdir -p $$(dirname $(HOME)/$$f); \
@@ -53,6 +61,7 @@ dotdirs:
 # * https://stackoverflow.com/questions/60074557/gnome-3-and-desktop-files-what-exactly-does-allow-disallow-lauching-do/73455006#73455006
 .PHONY: desktop
 desktop:
+	echo "-------------------------------------------------------------------------------"
 	for file in $(shell find "Desktop" -name "*.desktop" -type f ); do \
 		echo "[desktop] $(HOME)/$$file <- $(CURDIR)/$$file"; \
 		ln -sfn $(CURDIR)/$$file $(HOME)/$$file; \
@@ -63,6 +72,7 @@ desktop:
 
 .PHONY: etc
 etc:
+	echo "-------------------------------------------------------------------------------"
 	# add symlinks for etc
 	# Note (jc): since hard-link can't be created between filesystem (home and system are different partition)
 	#            let's use symbolic link
