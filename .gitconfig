@@ -73,6 +73,9 @@
 [url "git@github.com:"]
   pushInsteadOf = "https://github.com/"
 
+[url "git@gitlab.kitware.com:"]
+  pushInsteadOf = "https://gitlab.kitware.com/"
+
 [credential]
   helper = cache
 
